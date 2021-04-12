@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { quiz } from '../reducers/quiz'
-//import { OptionButton } from './OptionButton'
 
 export const CurrentQuestion = () => {
+  const [newAnswerIndex, setNewAnswerIndex] = useState(null)
   const question = useSelector((state) => state.quiz.questions[state.quiz.currentQuestionIndex])
-//  const question = useSelector((state) => console.log(state))
+  const answer = useSelector((state) =>  state.quiz.answers.find((a) => a.questionId === question.id));
+  console.log(answer)
+  //  const question = useSelector((state) => console.log(state))
 //  const quizOver = useSelector((state) => state.quiz.quizOver)
 //  console.log(quizOver)
 
@@ -23,16 +25,23 @@ export const CurrentQuestion = () => {
       <h1>Question: {question.questionText}</h1>
       <div className="button-container">
         {question.options.map((option, index) => {
+          const onClickHandler = () => {
+            dispatch(quiz.actions.submitAnswer({ questionId: question.id, answerIndex: index }))
+            setNewAnswerIndex (index)
+          }
           return (
             <button
               key={option}
               type="button"
-              onClick={() => dispatch(quiz.actions.submitAnswer({ questionId: question.id, answerIndex: index })) }>
+              onClick= {onClickHandler}>
               {option}
             </button>
           )
         })}
       </div>
+      {newAnswerIndex === question.correctAnswerIndex && 
+        <p>rätt</p>
+      }
       <button
         type="button"
         onClick={() => { dispatch(quiz.actions.goToNextQuestion()) }}>

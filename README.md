@@ -1,6 +1,6 @@
 # Redux quiz group project
 
-Testa 
+Test
 
 Replace this readme with your own information about your project.
 
