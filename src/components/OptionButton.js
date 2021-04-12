@@ -9,16 +9,5 @@ export const OptionButton = () => {
   const dispatch = useDispatch()
 
   return (
-    <div className="button-container">
-      {questions.options.map((option, index) => {
-        return (
-          <button
-            type="button"
-            onClick={() => { dispatch(quiz.actions.submitAnswer()) }}>
-            {question.option}
-          </button>
-        )
-      })}
-    </div>
   )
 }

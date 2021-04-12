@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { quiz } from '../reducers/quiz'
-import { OptionButton } from './OptionButton'
+//import { OptionButton } from './OptionButton'
 
 export const CurrentQuestion = () => {
   const question = useSelector((state) => state.quiz.questions[state.quiz.currentQuestionIndex])
@@ -21,7 +21,18 @@ export const CurrentQuestion = () => {
   return (
     <div>
       <h1>Question: {question.questionText}</h1>
-      <OptionButton />
+      <div className="button-container">
+        {question.options.map((option, index) => {
+          return (
+            <button
+              key={option}
+              type="button"
+              onClick={() => dispatch(quiz.actions.submitAnswer({ questionId: question.id, answerIndex: index })) }>
+              {option}
+            </button>
+          )
+        })}
+      </div>
       <button
         type="button"
         onClick={() => { dispatch(quiz.actions.goToNextQuestion()) }}>
