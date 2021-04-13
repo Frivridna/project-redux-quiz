@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { quiz } from '../reducers/quiz'
 
 import { Summary } from './Summary'
+import { Images } from './Images'
 
 export const CurrentQuestion = () => {
   // set isAllowedToAnswer to true so you can click it when the qurstion first pops up
@@ -31,15 +32,19 @@ export const CurrentQuestion = () => {
     dispatch(quiz.actions.goToNextQuestion())
   }
 
-  if(quizOver){
-    return(
+  if (quizOver) {
+    return (
       <Summary />
     )
   }
 
   return (
-    <div>
-      <h1>Question: {question.questionText}</h1>
+    <div className="question-container">
+      <img
+        src={question.image}
+        alt={question.altText}
+        className="ngt" />
+      <h1 className="title">{question.questionText}</h1>
       <div className="button-container">
         {question.options.map((option, index) => {
           const onAnswerSelcet = () => {
@@ -48,15 +53,13 @@ export const CurrentQuestion = () => {
             dispatch(quiz.actions.submitAnswer({ questionId: question.id, answerIndex: index }))
           }
 
-
-        
           return (
             <button
+              className="option-button"
               key={option}
               type="button"
               onClick= {onAnswerSelcet}
-              disabled={isAllowedToAnswer ? false : true}
-              >
+              disabled={isAllowedToAnswer ? false : true}>
               {option}
             </button>
           )
@@ -66,12 +69,12 @@ export const CurrentQuestion = () => {
         <p>Thats right!</p> : isAllowedToAnswer ? null : <p>Nope!</p> 
       }
       <button
+        className="next-button"
         type="button"
         onClick={onNextQuestion}>
           Next
       </button>
-      <p> {currentQuestionIndex+1}/5 </p>
-
+      <p className="current-question-index"> {currentQuestionIndex+1}/5 </p>
     </div>
   )
 }

@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  width: 100%;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -10,4 +11,38 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.question-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 10px;
+}
+
+.title {
+  font-size: 25px;
+}
+
+.button-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.option-button {
+  width: 48%;
+  height: 35px;
+  margin-bottom: 13px;
+  border-radius: 3px;
+  border: none;
+  background-color: #56C690;
+  color: whitesmoke;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.next-button {
+
 }
