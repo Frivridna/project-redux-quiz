@@ -4,20 +4,29 @@ import { useSelector, useDispatch } from 'react-redux'
 import { quiz } from '../reducers/quiz'
 
 export const CurrentQuestion = () => {
-  const [newAnswerIndex, setNewAnswerIndex] = useState(null)
+  // set isAllowedToAnswer to true so you can click it when the qurstion first pops up
+  const [isAllowedToAnswer, setIsAllowedToAnswer] = useState(true)
   const question = useSelector((state) => state.quiz.questions[state.quiz.currentQuestionIndex])
-  const answer = useSelector((state) =>  state.quiz.answers.find((a) => a.questionId === question.id));
-  console.log(answer)
-  //  const question = useSelector((state) => console.log(state))
-//  const quizOver = useSelector((state) => state.quiz.quizOver)
-//  console.log(quizOver)
-
-//  const options = useSelector((state) => state.quiz.questions[state.quiz.options])
+  const answer = useSelector((state) =>  {
+    // filter answers that belongs to each question.id
+    const answersToQuestion = state.quiz.answers.filter((answer) => answer.questionId === question.id);
+    // const lastIndexOfAnswer = answersToQuestion.length - 1;
+    // return answersToQuestion[lastIndexOfAnswer];
+    return answersToQuestion[0];
+  });
+  // const question = useSelector((state) => console.log(state))
+  // const quizOver = useSelector((state) => state.quiz.quizOver)
+  // console.log(quizOver)
 
   const dispatch = useDispatch()
 
   if (!question) {
     return <h1>Oh no! I could not find the current question!</h1>
+  }
+  const onNextQuestion = () => {
+    // when you click next question you are able to click option button again
+    setIsAllowedToAnswer(true)
+    dispatch(quiz.actions.goToNextQuestion())
   }
 
   return (
@@ -25,26 +34,33 @@ export const CurrentQuestion = () => {
       <h1>Question: {question.questionText}</h1>
       <div className="button-container">
         {question.options.map((option, index) => {
-          const onClickHandler = () => {
+          const onAnswerSelcet = () => {
+            // when option button is clicked all buttons is disabled
+            setIsAllowedToAnswer(false)
             dispatch(quiz.actions.submitAnswer({ questionId: question.id, answerIndex: index }))
-            setNewAnswerIndex (index)
           }
+        
           return (
             <button
               key={option}
               type="button"
-              onClick= {onClickHandler}>
+              onClick= {onAnswerSelcet}
+              // disable option buttons if clicked
+              disabled={isAllowedToAnswer ? false : true}
+              >
               {option}
             </button>
           )
         })}
       </div>
-      {newAnswerIndex === question.correctAnswerIndex && 
-        <p>rätt</p>
+      {/* if answer is deifned (true) and if its correct (true) render right*/}
+      {/* if isAllowedToAnswer is null (you havent answerd anything yet) dont render, if fals, render nope */}
+      {answer && answer.isCorrect ?
+        <p>Thats right!</p> : isAllowedToAnswer ? null : <p>Nope!</p> 
       }
       <button
         type="button"
-        onClick={() => { dispatch(quiz.actions.goToNextQuestion()) }}>
+        onClick={onNextQuestion}>
           Go to next question
       </button>
     </div>
