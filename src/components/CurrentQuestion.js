@@ -43,6 +43,7 @@ export const CurrentQuestion = () => {
         src={question.image}
         alt={question.altText}
         className="image-to-question" />
+      <div className="question-container-text"> 
       <h1 className="title">{question.questionText}</h1>
       <div className="button-container">
         {question.options.map((option, index) => {
@@ -64,9 +65,11 @@ export const CurrentQuestion = () => {
           )
         })}
       </div>
+      </div>
       {answer && answer.isCorrect ?
         <p>Thats right!</p> : isAllowedToAnswer ? null : <p>Nope!</p> 
       }
+      <div className="next-container">
       <button
         className="next-button"
         type="button"
@@ -74,6 +77,7 @@ export const CurrentQuestion = () => {
           Next
       </button>
       <p className="current-question-index"> {currentQuestionIndex+1}/5 </p>
+    </div>
     </div>
   )
 }

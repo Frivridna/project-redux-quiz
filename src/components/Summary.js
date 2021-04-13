@@ -17,9 +17,13 @@ export const Summary = () => {
 };
 
 return (
-    <>
-    <p>{numberOfAnswersCorrect}/5</p>
-    <button onClick={restart}>Restart</button>
-    </>
+    <div className="summary-container">
+    <p>Well done! you got {numberOfAnswersCorrect} answers right!</p>
+    <button 
+        className="restart-button"
+        onClick={restart}>
+        Restart
+    </button>
+    </div>
     );
 };
