@@ -14,6 +14,7 @@ export const CurrentQuestion = () => {
   const answer = useSelector((state) =>  {
     // filter answers that belongs to each question.id
     const answersToQuestion = state.quiz.answers.filter((answer) => answer.questionId === question.id);
+      console.log(answersToQuestion[0])
       return answersToQuestion[0];
   });
   const currentQuestionIndex = useSelector((state) => state.quiz.currentQuestionIndex)
@@ -53,22 +54,24 @@ export const CurrentQuestion = () => {
             dispatch(quiz.actions.submitAnswer({ questionId: question.id, answerIndex: index }))
           }
 
-          return (
-            <button
-              className="option-button"
-              key={option}
-              type="button"
-              onClick= {onAnswerSelcet}
-              disabled={isAllowedToAnswer ? false : true}>
-              {option}
+            return (
+              <button
+                  className="option-button"
+                key={option}
+                type="button"
+                onClick= {onAnswerSelcet}
+                disabled={isAllowedToAnswer ? false : true}>
+                {option}
             </button>
           )
         })}
       </div>
       </div>
+      <div className="answer-container">
       {answer && answer.isCorrect ?
-        <p>Thats right!</p> : isAllowedToAnswer ? null : <p>Nope!</p> 
+        <p className="answer-text">Thats right!</p> : isAllowedToAnswer ? null : <p className="answer-text">Nope! The correct answer was {question.options[question.correctAnswerIndex]}</p>
       }
+      </div>
       <div className="next-container">
       <button
         className="next-button"

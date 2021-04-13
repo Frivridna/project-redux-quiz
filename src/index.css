@@ -14,6 +14,7 @@ code {
 }
 
 .question-container {
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,7 +24,7 @@ code {
 
 .image-to-question {
   width: 100%;
-  height: 250px;
+  height: 200px;
   object-fit: cover;
 }
 
@@ -32,7 +33,9 @@ code {
 }
 
 .title {
-  font-size: 25px;
+  font-size: 18px;
+  margin-bottom: 20px;
+  text-align: center; 
 }
 
 .button-container {
@@ -43,7 +46,7 @@ code {
 
 .option-button {
   width: 48%;
-  height: 35px;
+  height: 60px;
   margin-bottom: 13px;
   border-radius: 3px;
   border: none;
@@ -51,6 +54,7 @@ code {
   color: whitesmoke;
   font-weight: bold;
   letter-spacing: 2px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
 }
 
 .next-container {
@@ -60,6 +64,14 @@ code {
   align-items: baseline;
   width: 90%;
   margin: 10px;
+}
+
+.anwer-container {
+  width: 75%;
+}
+
+.answer-text {
+  font-size: 12px;
 }
 
 .next-button {
