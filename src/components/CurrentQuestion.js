@@ -43,7 +43,7 @@ export const CurrentQuestion = () => {
       <img
         src={question.image}
         alt={question.altText}
-        className="ngt" />
+        className="image-to-question" />
       <h1 className="title">{question.questionText}</h1>
       <div className="button-container">
         {question.options.map((option, index) => {
