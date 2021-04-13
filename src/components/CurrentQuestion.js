@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { quiz } from '../reducers/quiz'
 
 import { Summary } from './Summary'
-import { Images } from './Images'
 
 export const CurrentQuestion = () => {
   // set isAllowedToAnswer to true so you can click it when the qurstion first pops up
