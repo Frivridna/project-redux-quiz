@@ -3,20 +3,22 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { quiz } from '../reducers/quiz'
 
+import { Summary } from './Summary'
+
 export const CurrentQuestion = () => {
   // set isAllowedToAnswer to true so you can click it when the qurstion first pops up
   const [isAllowedToAnswer, setIsAllowedToAnswer] = useState(true)
+
+  const quizOver = useSelector((state) => state.quiz.quizOver)
   const question = useSelector((state) => state.quiz.questions[state.quiz.currentQuestionIndex])
   const answer = useSelector((state) =>  {
     // filter answers that belongs to each question.id
     const answersToQuestion = state.quiz.answers.filter((answer) => answer.questionId === question.id);
-    // const lastIndexOfAnswer = answersToQuestion.length - 1;
-    // return answersToQuestion[lastIndexOfAnswer];
-    return answersToQuestion[0];
+      return answersToQuestion[0];
   });
-  // const question = useSelector((state) => console.log(state))
+  const currentQuestionIndex = useSelector((state) => state.quiz.currentQuestionIndex)
+
   // const quizOver = useSelector((state) => state.quiz.quizOver)
-  // console.log(quizOver)
 
   const dispatch = useDispatch()
 
@@ -29,6 +31,12 @@ export const CurrentQuestion = () => {
     dispatch(quiz.actions.goToNextQuestion())
   }
 
+  if(quizOver){
+    return(
+      <Summary />
+    )
+  }
+
   return (
     <div>
       <h1>Question: {question.questionText}</h1>
@@ -39,13 +47,14 @@ export const CurrentQuestion = () => {
             setIsAllowedToAnswer(false)
             dispatch(quiz.actions.submitAnswer({ questionId: question.id, answerIndex: index }))
           }
+
+
         
           return (
             <button
               key={option}
               type="button"
               onClick= {onAnswerSelcet}
-              // disable option buttons if clicked
               disabled={isAllowedToAnswer ? false : true}
               >
               {option}
@@ -53,16 +62,16 @@ export const CurrentQuestion = () => {
           )
         })}
       </div>
-      {/* if answer is deifned (true) and if its correct (true) render right*/}
-      {/* if isAllowedToAnswer is null (you havent answerd anything yet) dont render, if fals, render nope */}
       {answer && answer.isCorrect ?
         <p>Thats right!</p> : isAllowedToAnswer ? null : <p>Nope!</p> 
       }
       <button
         type="button"
         onClick={onNextQuestion}>
-          Go to next question
+          Next
       </button>
+      <p> {currentQuestionIndex+1}/5 </p>
+
     </div>
   )
 }

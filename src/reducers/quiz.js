@@ -2,8 +2,11 @@ import { createSlice } from '@reduxjs/toolkit'
 
 // Change these to your own questions!
 const questions = [
-  { id: 1, questionText: 'Who set the Olympic record for the 100m dash in 2012?', options: ['Usain Bolt', 'Justin Gatlin', 'Tyson Gay', 'Asafa Powell'], correctAnswerIndex: 0 },
-  { id: 2, questionText: 'When was Michael Phelps last named male World Swimmer of the Year?', options: ['2012', '2014', '2016', '2018'], correctAnswerIndex: 2 }
+  { id: 1, questionText: 'What do you get when you mix: Salt, Lime, Lime Juice, Cointreau', options: ['Margarita', 'Key Lime Pie', 'Cointreau Rickey', 'The Alchemist'], correctAnswerIndex: 0 },
+  { id: 2, questionText: 'What do you get when you mix: Lime, Sugar, cachaça, Ice', options: ['Great Fun', 'Mojito', 'Capirinha', 'Bossa Manhattan'], correctAnswerIndex: 2 },
+  { id: 3, questionText: 'What do you get when you mix: Lemon juice, sugar syrup, egg white, cubed ice', options: ['Whiskey Sour', 'Gin Fizz', 'Clover Club', 'Fudge Cookie'], correctAnswerIndex: 0 },
+  { id: 4, questionText: 'What do you get when you mix: Coffee, Whiskey, Sugar, Cream, Irish whiskey', options: ['Irish Cream Coffee', 'Jamaican Coffee', 'Gaelic Coffee', 'Irish Coffee'], correctAnswerIndex: 3 },
+  { id: 5, questionText: 'What do you get when you mix: Rom, Lime Juice, Strawberries, Ice', options: ['Strawberry Melon Fizz', 'Strawberry Daiquiri', 'Strawberry Mimosas', 'Tangy Strawberry Slush'], correctAnswerIndex: 1 }
 ]
 
 const initialState = {
